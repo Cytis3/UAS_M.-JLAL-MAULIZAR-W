@@ -19,91 +19,64 @@
             <div class="col-8 m-auto">
                 <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                     <div class="card-header">
-                        <b>FORM BIODATA SISWA</b>
+                        <b>FORM TAMBAH DATA</b>
                     </div>
                     <div class="card-body">
                         <form action="proses_tambah.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                                <input name="nama" type="text" class="form-control" id="exampleInputEmail1"
+                                <label for="exampleInputEmail1" class="form-label">Nama Menu</label>
+                                <input name="nama_menu" type="text" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">NISN</label>
-                                <input name="nisn" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tempat Lahir</label>
-                                <input name="tempat_lahir" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tanggal Lahir</label>
-                                <input name="tgl_lahir" type="date" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                <input name="alamat" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input name="email" type="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                                <br>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="inlineRadio1" value="Laki-laki">
-                                    <label class="form-check-label" for="inlineRadio1">Laki-Laki</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="inlineRadio2" value="Perempuan">
-                                    <label class="form-check-label" for="inlineRadio2">Perempuan</label>
-                                </div>
-                                <div class="mb-2">
-                                    <label for="exampleInputEmail" class="form-label">Gelombang</label>
-                                    <select class="form-control" name="gelombang" id="">
-                                        <?php
-                                    //kode untuk looping datat jurusan
-                                    include_once('../koneksi.php');
-                                    $qry_jur = "SELECT * FROM gelombang";
-                                    $data_jur = mysqli_query($koneksi, $qry_jur);
-                                    foreach ($data_jur as $item_jur) {
+                                <label for="exampleInputEmail1" class="form-label">Jenis</label>
+                                <select class="form-control" name="nama_jenis" id="">
+                                    <option value="">-Pilih Jenis-</option>
+                                    <?php 
+                                        //kode untuk looping datat jurusan
+                                        include_once('../koneksi.php');
+                                        $qry_jur = "SELECT * FROM jenis_menu";
+                                        $data_jur = mysqli_query($koneksi,$qry_jur);
+                                        foreach($data_jur as $item_jur){
                                     ?>
-                                        <option value="<?= $item_jur['id'] ?>"><?= $item_jur['kode'] ?> - <?= $item_jur['gelombang'] ?></option>
+                                    <option value="<?=$item_jur['id']?>"><?=$item_jur['nama_jenis']?></option>
                                     <?php
                                         //penutup kode looping jurusan
-                                    }
-                                    ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Jurusan</label>
-                                <select class="form-control" name="jurusan" id="">
-                                    <?php
-                                    //kode untuk looping datat jurusan
-                                    include_once('../koneksi.php');
-                                    $qry_jur = "SELECT * FROM jurusan";
-                                    $data_jur = mysqli_query($koneksi, $qry_jur);
-                                    foreach ($data_jur as $item_jur) {
-                                    ?>
-                                        <option value="<?= $item_jur['id'] ?>"><?= $item_jur['kode'] ?> - <?= $item_jur['nama_jurusan'] ?></option>
-                                    <?php
-                                        //penutup kode looping jurusan
-                                    }
+                                        }
                                     ?>
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Supplier</label>
+                                <select class="form-control" name="nama_supplier" id="">
+                                    <option value="">-Pilih Supplier-</option>
+                                    <?php 
+                                        //kode untuk looping datat jurusan
+                                        include_once('../koneksi.php');
+                                        $qry_jur = "SELECT * FROM supplier";
+                                        $data_jur = mysqli_query($koneksi,$qry_jur);
+                                        foreach($data_jur as $item_jur){
+                                    ?>
+                                    <option value="<?=$item_jur['id']?>"><?=$item_jur['nama_supplier']?></option>
+                                    <?php
+                                        //penutup kode looping jurusan
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Harga</label>
+                                <input name="harga" type="number" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Stok</label>
+                                <input name="stok" type="number" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Foto</label>
-                                <input name="foto" accept="image/*" type="file" class="form-control" id="exampleInputEmail1"
+                                <input name="foto_menu" accept="image/*" type="file" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

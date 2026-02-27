@@ -6,7 +6,7 @@
     $nama_jenis = $_POST['nama_jenis'];
 
     #3. Query Insert (proses tambah data)
-    $query = "INSERT INTO jenis menu (nama_jenis) 
+    $query = "INSERT INTO jenis_menu (nama_jenis) 
     VALUES ('$nama_jenis')";
 
     $tambah = mysqli_query($koneksi,$query);

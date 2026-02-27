@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Siswa</title>
+    <title>Menu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
     <link rel="stylesheet" href="../css/all.css">
 </head>
-
 <body style="background-color:#d1e6d4">
     <?php
     include_once("../navbar.php");
     ?>
-
     <div class="container">
         <div class="row my-5">
             <div class="col-10 m-auto">
                 <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                     <div class="card-header">
-                        <b>BIODATA SISWA</b>
+                        <b>MENU</b>
                         <a href="form_tambah.php" class="float-end btn btn-primary btn-sm"><i class="fa-solid fa-user-plus"></i> Tambah data</a>
                     </div>
                     <div class="card-body">
@@ -29,119 +25,103 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">NISN</th>
-                                    <th scope="col">Jurusan</th>
-                                    <th scope="col">Gelombang</th>
-                                    <th scope="col">Tanggal Lahir</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Nama Menu</th>
+                                    <th scope="col">Jenis</th>
+                                    <th scope="col">Supplier</th>
+                                    <th scope="col">Harga</th>
+                                    <th scope="col">Stok</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 #1. koneksi
                                 include("../koneksi.php");
-
-                                #2. menulikan query menampilkan data
-                                $qry = "SELECT *, biodata.id AS ids FROM biodata INNER JOIN jurusan ON biodata.jurusans_id = jurusan.id INNER JOIN gelombang ON biodata.gelombangs_id = gelombang.id";
-
+                                #2. menuliskan query menampilkan data
+                                $qry = "SELECT *, menu.id AS ids, jenis_menu.nama_jenis FROM menu INNER JOIN supplier ON menu.id_supplier = supplier.id INNER JOIN jenis_menu ON menu.id_jenis = jenis_menu.id";
                                 #3. menjalankan query
-                                $tampil = mysqli_query($koneksi, $qry);
-
+                                $tampil = mysqli_query($koneksi,$qry);
                                 #4. looping hasil query
                                 $nomor = 1;
-                                foreach ($tampil as $data) {
-
+                                foreach($tampil as $data){
                                 ?>
-                                    <tr>
-                                        <th scope="row"><?= $nomor++ ?></th>
-                                        <td><?= $data['nama'] ?></td>
-                                        <td><?= $data['nisn'] ?></td>
-                                        <td><?= $data['nama_jurusan'] ?></td>
-                                        <td><?= $data['gelombang'] ?></td>
-                                        <td><?= $data['tgl_lahir'] ?></td>
-                                        <td>
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data['ids'] ?>"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                            <a href="formedit.php?id=<?= $data['ids'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalhapus<?= $data['ids'] ?>"><i class="fa-solid fa-trash"></i></button>
-
-                                            <!-- Modal Detail-->
-                                            <div class="modal fade" id="exampleModal<?= $data['ids'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Data Detail <?= $data['nama'] ?></h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td colspan="2"><img src="../fotosiswa/<?= $data['foto'] ?>" height="150" alt=""></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Nama</td>
-                                                                        <th scope="row"><?= $data['nama'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>NISN</td>
-                                                                        <th scope="row"><?= $data['nisn'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Tempat Lahir</td>
-                                                                        <th scope="row"><?= $data['tempat_lahir'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Tanggal Lahir</td>
-                                                                        <th scope="row"><?= $data['tgl_lahir'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Alamat</td>
-                                                                        <th scope="row"><?= $data['alamat'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Email</td>
-                                                                        <th scope="row"><?= $data['email'] ?></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Jenis Kelamin</td>
-                                                                        <th scope="row"><?= $data['jenis_kelamin'] ?></th>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <tr>
+                                    <th scope="row"><?=$nomor++?></th>
+                                    <td><?=$data['nama_menu']?></td>
+                                    <td><?=$data['nama_jenis']?></td>
+                                    <td><?=$data['nama_supplier']?></td>
+                                    <td><?=$data['harga']?></td>
+                                    <td><?=$data['stok']?></td>
+                                    <td><img src="../img/<?=$data['foto_menu']?>" height="50" alt=""></td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?=$data['ids']?>"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                        <a href="formedit.php?id=<?=$data['ids']?>" class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalhapus<?=$data['ids']?>"><i class="fa-solid fa-trash"></i></button>
+                                        <!-- Modal Detail-->
+                                        <div class="modal fade" id="exampleModal<?=$data['ids']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Data Detail <?=$data['nama_menu']?></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-
-                                            <!-- Modal Hapus-->
-                                            <div class="modal fade" id="modalhapus<?= $data['ids'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Peringatan</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Yakin Data Dengan Nama <?= $data['nama'] ?> Ingin Dihapus?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <a href="proseshapus.php?id=<?= $data['ids'] ?>" class="btn btn-danger">Hapus</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="modal-body">
+                                                <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="2"><img src="../img/<?=$data['foto_unit']?>" height="150" alt=""></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nama Menu</td>
+                                                        <th scope="row"><?=$data['nama_menu']?></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jenis</td>
+                                                        <th scope="row"><?=$data['nama_jenis']?></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Supplier</td>
+                                                        <th scope="row"><?=$data['nama_supplier']?></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Harga</td>
+                                                        <th scope="row"><?=$data['harga']?></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Stok</td>
+                                                        <th scope="row"><?=$data['stok']?></th>
+                                                    </tr>
+                                                </tbody>
+                                                </table>
                                             </div>
-                                        </td>
-                                    </tr>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <!-- Modal Hapus-->
+                                        <div class="modal fade" id="modalhapus<?=$data['ids']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Peringatan</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Yakin Data Dengan Nama Menu <?=$data['nama_menu']?> Ingin Dihapus?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a href="proseshapus.php?id=<?=$data['ids']?>" class="btn btn-danger">Hapus</a>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <?php
                                 }
                                 ?>
-
                             </tbody>
                         </table>
                     </div>
@@ -149,12 +129,9 @@
             </div>
         </div>
     </div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../js/all.js"></script>
 </body>
-
 </html>

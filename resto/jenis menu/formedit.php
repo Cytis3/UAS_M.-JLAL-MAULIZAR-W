@@ -1,7 +1,7 @@
 <?php
 include_once("../koneksi.php");
 $idedit = $_GET['id'];
-$qry = "SELECT * FROM jenis menu WHERE id='$idedit'";
+$qry = "SELECT * FROM jenis_menu WHERE id='$idedit'";
 $edit = mysqli_query($koneksi,$qry);
 $data = mysqli_fetch_array($edit);
 ?>
@@ -30,10 +30,10 @@ $data = mysqli_fetch_array($edit);
                     </div>
                     <div class="card-body">
                         <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="<?=$data['id']?>">
+                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Nama Jenis</label>
-                                <input value="<?=$data['nama_jenis']?>" readonly name="nama_jenis" type="text" class="form-control" id="exampleInputEmail1"
+                                <input value="<?= $data['nama_jenis'] ?>" name="nama_jenis" type="text" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

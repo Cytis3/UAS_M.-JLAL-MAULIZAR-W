@@ -12,7 +12,7 @@ if (isset($_POST['tombol'])) {
     $pass = md5($_POST['password']);
 
     #3. cek apakah email dan password ada di database
-    $qry = "SELECT * FROM users WHERE ='$username' AND pass='$pass'";
+    $qry = "SELECT * FROM users WHERE username='$username' AND pass='$pass'";
     $result = mysqli_query($koneksi, $qry);
     $cek_login = mysqli_num_rows($result);
 
@@ -61,7 +61,7 @@ if (isset($_POST['tombol'])) {
                         <form action="login.php" method="post">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                                <input type="email" name="username" class="form-control" id="exampleInputEmail1"
+                                <input type="text" name="username" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
 
                             </div>

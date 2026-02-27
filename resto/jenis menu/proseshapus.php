@@ -6,7 +6,7 @@
     $idhapus = $_GET['id'];
 
     #3. menulis query
-    $qry = "DELETE FROM jenis menu WHERE id='$idhapus'";
+    $qry = "DELETE FROM jenis_menu WHERE id='$idhapus'";
 
     #4. menjalan query
     $hapus = mysqli_query($koneksi,$qry);

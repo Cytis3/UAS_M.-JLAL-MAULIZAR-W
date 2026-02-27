@@ -3,23 +3,19 @@
     include("../koneksi.php");
 
     #2. Mengambil Value dari Form Tambah
-    $nama = $_POST['nama'];
-    $nisn = $_POST['nisn'];
-    $tempat_lahir = $_POST['tempat_lahir'];
-    $tgl_lahir = $_POST['tgl_lahir'];
-    $alamat = $_POST['alamat'];
-    $email = $_POST['email'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
-    $jurusan = $_POST['jurusan'];
-    $gelombang = $_POST['gelombang'];
-    $nama_foto = $_FILES['foto']['name'];
-    $tmp_foto = $_FILES['foto']['tmp_name'];
+    $nama_menu = $_POST['nama_menu'];
+    $harga = $_POST['harga'];
+    $stok = $_POST['stok'];
+    $nama_supplier = $_POST['nama_supplier'];
+    $nama_jenis = $_POST['nama_jenis'];
+    $nama_foto = $_FILES['foto_menu']['name'];
+    $tmp_foto = $_FILES['foto_menu']['tmp_name'];
 
     #3. Query Insert (proses tambah data)
-    $query = "INSERT INTO biodata (nama,nisn,tempat_lahir,tgl_lahir,alamat,email,jenis_kelamin,jurusans_id,gelombangs_id,foto) 
-    VALUES ('$nama','$nisn','$tempat_lahir','$tgl_lahir','$alamat','$email','$jenis_kelamin','$jurusan','$gelombang','$nama_foto')";
+    $query = "INSERT INTO menu(nama_menu,harga,stok,suppliers_id,jeniss_id,foto_menu) 
+    VALUES ('$nama_menu','$harga','$stok','$nama_supplier','$nama_jenis','$nama_foto')";
 
-    move_uploaded_file($tmp_foto,"../fotosiswa/$nama_foto");
+    move_uploaded_file($tmp_foto,"../fotomenu/$nama_foto");
 
     $tambah = mysqli_query($koneksi,$query);
 

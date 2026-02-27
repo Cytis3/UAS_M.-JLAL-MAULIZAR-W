@@ -24,9 +24,9 @@ echo "Kode Error : $error_foto<br>";
 echo $ket;
 
 //upload file
-move_uploaded_file($tmp_foto,"foto/$nama_foto")
+move_uploaded_file($tmp_foto,"foto_menu/$nama_foto")
 ?>
 <hr>
-<img src="foto/<?=$nama_foto?>" alt="">
+<img src="foto_menu/<?=$nama_foto?>" alt="">
 <hr>
 <a href="index.php">kembali</a>

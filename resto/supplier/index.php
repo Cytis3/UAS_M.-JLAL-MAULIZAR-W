@@ -30,6 +30,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Supplier</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

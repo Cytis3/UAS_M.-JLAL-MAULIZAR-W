@@ -8,7 +8,7 @@
 
     
     #3. Query Update (proses edit data)
-    $query = "UPDATE jenis menu SET nama_jenis='$nama_jenis' 
+    $query = "UPDATE jenis_menu SET nama_jenis='$nama_jenis' 
     WHERE id='$id'";
     
     $tambah = mysqli_query($koneksi,$query);
